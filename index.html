@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Edge Device - Offloading</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin: 20px;
+        }
+
+        input[type=file] {
+            margin: 10px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background: #0056b3;
+            cursor: pointer;
+        }
+
+        img {
+            max-width: 90%;
+            margin-top: 20px;
+        }
+
+        pre {
+            text-align: left;
+            display: inline-block;
+            max-width: 90%;
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Edge Computing: Mobile → Laptop YOLOv5</h2>
+    <p>Upload image to offload detection</p>
+
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" required><br>
+        <button type="submit">Upload & Detect</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        const form = document.getElementById("uploadForm");
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const fileInput = form.querySelector('input[name="file"]');
+            const file = fileInput.files[0];
+            if (!file) return alert("Select a file");
+
+            const formData = new FormData();
+            formData.append("file", file);
+
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = "<p>Processing on edge server...</p>";
+
+            try {
+                // Replace with your laptop IP
+                const EDGE_SERVER = "http://192.168.112.196:8000";
+                const res = await fetch(`${EDGE_SERVER}/detect`, { method: "POST", body: formData });
+                const data = await res.json();
+
+                const imgUrl = data.image_url;
+                const detections = data.detections;
+
+                resultDiv.innerHTML = `
+                    <h3>Detection Result ✅</h3>
+                    <img src="${imgUrl}" alt="Annotated Image">
+                    <pre>${JSON.stringify(detections, null, 2)}</pre>
+                `;
+            } catch (err) {
+                console.error(err);
+                resultDiv.innerHTML = "<p style='color:red'>Error sending image to edge server</p>";
+            }
+        });
+    </script>
+    
+</body>
+
+</html>
