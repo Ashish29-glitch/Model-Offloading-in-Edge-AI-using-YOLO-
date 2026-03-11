@@ -951,9 +951,9 @@ This project is licensed under the **MIT License** - see the LICENSE file for de
 
 ### Getting Help
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/Model-Offloading-Edge-AI-YOLO/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/Model-Offloading-Edge-AI-YOLO/discussions)
-- **Email**: your.email@example.com
+- **Issues**: [GitHub Issues]((https://github.com/Ashish29-glitch/Model-Offloading-in-Edge-AI-using-YOLO-.git)
+- **Discussions**: [GitHub Discussions](https://github.com/Ashish29-glitch/Model-Offloading-in-Edge-AI-using-YOLO-.git)
+- **Email**:
 
 ### Quick Links
 
@@ -1101,3 +1101,4 @@ deactivate
 **Last Updated:** January 2024
 **License:** MIT
 **Status:** ✅ Production Ready
+
